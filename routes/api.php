@@ -16,10 +16,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
 /*
 Route::get('add',function (Request $request){
     $result=addInfo('Happiness is a butterfly, which ,when pursued, is always just beyond your grasp, but which, if you will sit down quietly, may alight upon you.',
@@ -30,16 +26,6 @@ Route::get('add',function (Request $request){
 });
 */
 
-Route::get('/new', function (Request $request) {
-    $newInfo=DB::select('select * from mottos ORDER by id DESC  limit 1');
-    return response(json_encode($newInfo),200)->header('Content-Type', 'application/json');
-});
-
 Route::post('/add','mottosController@store');
-
-
-function  addInfo($englishWord,$chineseWord,$pic,$xiaobian){
-    $infoTime=date("Y-m-d H:i",time());
-    $info=DB::insert('insert into mottos (pic,englishWord,chineseWord,xiaobian,created_at,updated_at) values (?,?,?,?,?,?)',[$pic,$englishWord,$chineseWord,$xiaobian,$infoTime,$infoTime]);
-    return $info;
-}
+Route::get('/new','mottosController@getToday');
+Route::get('/show/{mottos}','mottosController@show');
