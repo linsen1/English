@@ -37,5 +37,11 @@ class mottosController extends Controller
     public function show(Mottos $mottos){
         return  $mottos;
     }
+    public function GetALL()
+    {
+        $newList=DB::table('mottos')->paginate(1);
+        return response()->json($newList,201);
+    }
+
 
 }

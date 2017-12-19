@@ -29,3 +29,4 @@ Route::get('add',function (Request $request){
 Route::post('/add','mottosController@store');
 Route::get('/new','mottosController@getToday');
 Route::get('/show/{mottos}','mottosController@show');
+Route::get('/getAll','mottosController@GetALL');

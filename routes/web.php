@@ -14,3 +14,6 @@
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/motto/add', function () {
+    return view('addmotto');
+});
