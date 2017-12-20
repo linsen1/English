@@ -14,7 +14,7 @@ class Main extends  Component{
         this.hanleAddMottos=this.hanleAddMottos.bind(this);
     }
     hanleAddMottos(mottos){
-        fetch('api/add/',{
+        fetch('/api/add/',{
             method:"post",
             headers:{
                 'Accept':'application/json',
@@ -23,7 +23,8 @@ class Main extends  Component{
             body:JSON.stringify(mottos)
         })
             .then(response=>{
-                alert(JSON.stringify(response))
+
+                location.href='/english/mottoList/';
             })
     }
     render(){

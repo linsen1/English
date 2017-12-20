@@ -41053,7 +41053,7 @@ var Main = function (_Component) {
     _createClass(Main, [{
         key: 'hanleAddMottos',
         value: function hanleAddMottos(mottos) {
-            fetch('api/add/', {
+            fetch('/api/add/', {
                 method: "post",
                 headers: {
                     'Accept': 'application/json',
@@ -41061,7 +41061,8 @@ var Main = function (_Component) {
                 },
                 body: JSON.stringify(mottos)
             }).then(function (response) {
-                alert(JSON.stringify(response));
+
+                location.href = '/english/mottoList/';
             });
         }
     }, {

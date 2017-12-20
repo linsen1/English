@@ -27,6 +27,8 @@ Route::get('add',function (Request $request){
 */
 
 Route::post('/add','mottosController@store');
+Route::put('/english/edit/{id}','mottosController@updateMotto');
+Route::delete('/english/del/{id}','mottosController@delMotto');
 Route::get('/new','mottosController@getToday');
 Route::get('/show/{mottos}','mottosController@show');
 Route::get('/getAll','mottosController@GetALL');

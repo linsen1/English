@@ -20,6 +20,7 @@ class mottosController extends Controller
             'pic' => 'required',
             'xiaobian' => 'required',
         ]);
+
         $mottos=Mottos::create($request->all());
         return response()->json( $mottos,201);
     }
@@ -39,9 +40,29 @@ class mottosController extends Controller
     }
     public function GetALL()
     {
-        $newList=DB::table('mottos')->paginate(1);
+        $newList=DB::table('mottos')->orderBy('id','desc')->paginate(5);
         return response()->json($newList,201);
     }
-
+    /*
+     * 更新信息
+     */
+    public function updateMotto(Request $request,$id){
+        $this->validate($request, [
+            'chineseWord' => 'required',
+            'englishWord' => 'required',
+            'pic' => 'required',
+            'xiaobian' => 'required',
+        ]);
+        $chineseWord=$request->input('chineseWord');
+        $englishWord=$request->input('englishWord');
+        $pic=$request->input('englishWord');
+        $xiaobian=$request->input('xiaobian');
+        $updateResult=DB::table('mottos')->where('id',$id)->update(['chineseWord'=>$chineseWord,'englishWord'=>$englishWord,'xiaobian'=>$xiaobian,'pic'=>$pic]);
+        return redirect('/english/mottoList');
+    }
+    public function delMotto($id){
+        $DelResult=DB::table('mottos')->where('id','=',$id)->delete();
+        return redirect('/english/mottoList');
+    }
 
 }
