@@ -23,7 +23,7 @@ class Main extends  Component{
             body:JSON.stringify(mottos)
         })
             .then(response=>{
-                alert(response.json())
+                alert(JSON.stringify(response))
             })
     }
     render(){

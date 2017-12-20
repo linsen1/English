@@ -41061,7 +41061,7 @@ var Main = function (_Component) {
                 },
                 body: JSON.stringify(mottos)
             }).then(function (response) {
-                alert(response.json());
+                alert(JSON.stringify(response));
             });
         }
     }, {
@@ -53558,56 +53558,98 @@ var AddMottos = function (_Component) {
         value: function render() {
             var _this2 = this;
 
-            var divStyle = {};
             return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                'div',
-                null,
+                'form',
+                { onSubmit: this.handleSubmit, className: 'form-horizontal' },
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                     'h3',
-                    null,
-                    '\u6DFB\u52A0\u4FE1\u606F'
+                    { className: 'text-center' },
+                    '\u6DFB\u52A0\u5185\u5BB9'
                 ),
                 __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
                     'div',
-                    { style: divStyle },
+                    { className: 'form-group' },
                     __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                        'form',
-                        { onSubmit: this.handleSubmit },
+                        'div',
+                        { className: 'col-md-1 text-right' },
                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                            'lable',
-                            null,
-                            ' \u82F1\u6587:',
-                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', onChange: function onChange(e) {
-                                    return _this2.handleInput('englishWord', e);
-                                } })
-                        ),
-                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                            'lable',
-                            null,
-                            ' \u4E2D\u6587:',
-                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', onChange: function onChange(e) {
-                                    return _this2.handleInput('chineseWord', e);
-                                } })
-                        ),
-                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                            'lable',
-                            null,
-                            ' \u603B\u7ED3:',
-                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', onChange: function onChange(e) {
-                                    return _this2.handleInput('xiaobian', e);
-                                } })
-                        ),
-                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
-                            'lable',
-                            null,
-                            ' \u56FE\u7247:',
-                            __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', onChange: function onChange(e) {
-                                    return _this2.handleInput('pic', e);
-                                } })
-                        ),
-                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'submit', value: '\u63D0\u4EA4' }),
-                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'hidden', name: '_token', value: '{{ csrf_token() }}' })
+                            'label',
+                            { className: 'control-label' },
+                            ' \u82F1\u6587:'
+                        )
+                    ),
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'div',
+                        { className: 'col-md-11' },
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('textarea', { onChange: function onChange(e) {
+                                return _this2.handleInput('englishWord', e);
+                            }, rows: '3', className: 'form-control' })
                     )
+                ),
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    'div',
+                    { className: 'form-group' },
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'div',
+                        { className: 'col-md-1 text-right' },
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'lable',
+                            { className: 'control-label' },
+                            ' \u4E2D\u6587:'
+                        )
+                    ),
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'div',
+                        { className: 'col-md-11' },
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('textarea', { onChange: function onChange(e) {
+                                return _this2.handleInput('chineseWord', e);
+                            }, className: 'form-control' })
+                    )
+                ),
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    'div',
+                    { className: 'form-group' },
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'div',
+                        { className: 'col-md-1 text-right' },
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'lable',
+                            { className: 'control-label' },
+                            ' \u603B\u7ED3:'
+                        )
+                    ),
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'div',
+                        { className: 'col-md-11' },
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('textarea', { onChange: function onChange(e) {
+                                return _this2.handleInput('xiaobian', e);
+                            }, className: 'form-control' })
+                    )
+                ),
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    'div',
+                    { className: 'form-group' },
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'div',
+                        { className: 'col-md-1 text-right' },
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'lable',
+                            { className: 'control-label' },
+                            ' \u56FE\u7247:'
+                        )
+                    ),
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'div',
+                        { className: 'col-md-11' },
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', onChange: function onChange(e) {
+                                return _this2.handleInput('pic', e);
+                            }, className: 'form-control' })
+                    )
+                ),
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    'div',
+                    { className: 'col-md-12 text-center' },
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'submit', value: '\u63D0\u4EA4', className: 'btn btn-default' })
                 )
             );
         }

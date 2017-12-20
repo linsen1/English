@@ -27,29 +27,47 @@ class AddMottos extends  Component{
         this.props.onAdd(this.state.newMotto);
     }
     render(){
-        const divStyle={
-        }
+
         return(
-            <div>
-                <h3>添加信息</h3>
-                <div style={divStyle}>
-                    <form onSubmit={this.handleSubmit}>
-                        <lable> 英文:
-                            <input type="text" onChange={(e)=>this.handleInput('englishWord',e)} />
-                        </lable>
-                        <lable> 中文:
-                            <input type="text" onChange={(e)=>this.handleInput('chineseWord',e)} />
-                        </lable>
-                        <lable> 总结:
-                            <input type="text" onChange={(e)=>this.handleInput('xiaobian',e)} />
-                        </lable>
-                        <lable> 图片:
-                            <input type="text" onChange={(e)=>this.handleInput('pic',e)} />
-                        </lable>
-                        <input type="submit" value="提交"/>
+
+                    <form onSubmit={this.handleSubmit} className="form-horizontal">
+                        <h3 className="text-center">添加内容</h3>
+                    <div  className="form-group" >
+                        <div className="col-md-1 text-right" >
+                        <label className="control-label"> 英文:</label>
+                        </div>
+                    <div className="col-md-11">
+                    <textarea onChange={(e)=>this.handleInput('englishWord',e)} rows="3" className="form-control"/>
+                    </div>
+                    </div>
+                     <div  className="form-group" >
+                         <div className="col-md-1 text-right" >
+                        <lable className="control-label"> 中文:</lable>
+                         </div>
+                         <div className="col-md-11">
+                            <textarea onChange={(e)=>this.handleInput('chineseWord',e)} className="form-control" />
+                         </div>
+                        </div>
+                        <div  className="form-group" >
+                            <div className="col-md-1 text-right" >
+                        <lable className="control-label"> 总结:</lable>
+                            </div>
+                            <div className="col-md-11">
+                            <textarea onChange={(e)=>this.handleInput('xiaobian',e)}  className="form-control" />
+                            </div>
+                        </div>
+                        <div  className="form-group" >
+                            <div className="col-md-1 text-right" >
+                        <lable className="control-label"> 图片:</lable>
+                            </div>
+                            <div className="col-md-11">
+                            <input type="text" onChange={(e)=>this.handleInput('pic',e)} className="form-control"/>
+                            </div>
+                        </div>
+                        <div className="col-md-12 text-center">
+                        <input type="submit" value="提交" className="btn btn-default"/>
+                        </div>
                     </form>
-                </div>
-            </div>
         );
     }
 }
