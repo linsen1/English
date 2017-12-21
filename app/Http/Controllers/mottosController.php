@@ -55,7 +55,7 @@ class mottosController extends Controller
         ]);
         $chineseWord=$request->input('chineseWord');
         $englishWord=$request->input('englishWord');
-        $pic=$request->input('englishWord');
+        $pic=$request->input('pic');
         $xiaobian=$request->input('xiaobian');
         $updateResult=DB::table('mottos')->where('id',$id)->update(['chineseWord'=>$chineseWord,'englishWord'=>$englishWord,'xiaobian'=>$xiaobian,'pic'=>$pic]);
         return redirect('/english/mottoList');
