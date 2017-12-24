@@ -38,6 +38,12 @@
                               <input type="text" class="form-control " id="pic" name="pic" value="{{$motto[0]->pic}}">
                           </div>
                       </div>
+                      <div class="form-group">
+                          <label class="col-sm-2 control-label text-right" for="audio">音频:</label>
+                          <div class="col-sm-10">
+                              <input type="text" class="form-control " id="audio" name="audio" value="{{$motto[0]->audio}}">
+                          </div>
+                      </div>
                       <div style="text-align: center">
                           <button type="submit" class="btn btn-default" style="vertical-align: middle;text-align: center; ">修改</button>
                       </div>

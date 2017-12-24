@@ -18,9 +18,9 @@ class mottosController extends Controller
             'chineseWord' => 'required',
             'englishWord' => 'required',
             'pic' => 'required',
-            'xiaobian' => 'required',
+            'xiaobian' => 'required'
         ]);
-
+        date_default_timezone_set("Asia/Chongqing");
         $mottos=Mottos::create($request->all());
         return response()->json( $mottos,201);
     }
@@ -51,13 +51,14 @@ class mottosController extends Controller
             'chineseWord' => 'required',
             'englishWord' => 'required',
             'pic' => 'required',
-            'xiaobian' => 'required',
+            'xiaobian' => 'required'
         ]);
         $chineseWord=$request->input('chineseWord');
         $englishWord=$request->input('englishWord');
         $pic=$request->input('pic');
         $xiaobian=$request->input('xiaobian');
-        $updateResult=DB::table('mottos')->where('id',$id)->update(['chineseWord'=>$chineseWord,'englishWord'=>$englishWord,'xiaobian'=>$xiaobian,'pic'=>$pic]);
+        $audio=$request->input('audio');
+        $updateResult=DB::table('mottos')->where('id',$id)->update(['chineseWord'=>$chineseWord,'englishWord'=>$englishWord,'xiaobian'=>$xiaobian,'pic'=>$pic,'audio'=>$audio]);
         return redirect('/english/mottoList');
     }
     public function delMotto($id){

@@ -11,7 +11,8 @@ class AddMottos extends  Component{
                 pic: '',
                 englishWord: '',
                 chineseWord: '',
-                xiaobian: ''
+                xiaobian: '',
+                audio:''
             }
         }
         this.handleSubmit=this.handleSubmit.bind(this);
@@ -62,6 +63,14 @@ class AddMottos extends  Component{
                             </div>
                             <div className="col-md-11">
                             <input type="text" onChange={(e)=>this.handleInput('pic',e)} className="form-control"/>
+                            </div>
+                        </div>
+                        <div  className="form-group" >
+                            <div className="col-md-1 text-right" >
+                                <lable className="control-label"> 音频:</lable>
+                            </div>
+                            <div className="col-md-11">
+                                <input type="text" onChange={(e)=>this.handleInput('audio',e)} className="form-control"/>
                             </div>
                         </div>
                         <div className="col-md-12 text-center">

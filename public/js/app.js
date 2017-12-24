@@ -53533,7 +53533,8 @@ var AddMottos = function (_Component) {
                 pic: '',
                 englishWord: '',
                 chineseWord: '',
-                xiaobian: ''
+                xiaobian: '',
+                audio: ''
             }
         };
         _this.handleSubmit = _this.handleSubmit.bind(_this);
@@ -53644,6 +53645,26 @@ var AddMottos = function (_Component) {
                         { className: 'col-md-11' },
                         __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', onChange: function onChange(e) {
                                 return _this2.handleInput('pic', e);
+                            }, className: 'form-control' })
+                    )
+                ),
+                __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                    'div',
+                    { className: 'form-group' },
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'div',
+                        { className: 'col-md-1 text-right' },
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                            'lable',
+                            { className: 'control-label' },
+                            ' \u97F3\u9891:'
+                        )
+                    ),
+                    __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(
+                        'div',
+                        { className: 'col-md-11' },
+                        __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement('input', { type: 'text', onChange: function onChange(e) {
+                                return _this2.handleInput('audio', e);
                             }, className: 'form-control' })
                     )
                 ),
