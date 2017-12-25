@@ -26,3 +26,13 @@ Route::get('/english/editMotto/{id}',function ($id){
 Route::get('/motto/add', function () {
     return view('addmotto');
 });
+/*
+ * 添加单词
+ */
+Route::get('/english/addNewWord/{id}',function ($id){
+    return view('english.addNewWord',['id'=>$id]);
+});
+Route::get('/english/editNewWordList/{id}',function($id){
+    $wordList=DB::table('new_words')->where('mottoId',$id)->orderBy('id','desc')->paginate(10);
+    return view('english.newWordList',['wordList'=>$wordList,'id'=>$id]);
+});

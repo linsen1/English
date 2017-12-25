@@ -11,9 +11,9 @@
     <body>
 
             <div class="container">
-                <h3 className="text-center">内容列表</h3>
+                <h3 className="text-center">新词列表</h3>
                 <ol class="breadcrumb">
-                    <li><a href="/english/mottoAdd">添加内容</a></li>
+                    <li><a href="/english/addNewWord/{{$id}}">添加新词</a></li>
                 </ol>
                <table class="table table-bordered" style="margin-top: 20px">
                 <tr>
@@ -22,15 +22,14 @@
                     <td>编辑</td>
                     <td>删除</td>
                 </tr>
-                   @foreach ($mottoList as $motto)
+                   @foreach ($wordList as $word)
                 <tr>
-                    <td>{{$motto->id}}</td>
-                    <td>{{$motto->englishWord}}</td>
-                    <td><a href="/english/editMotto/{{$motto->id}}">短句</a>
-                    &nbsp;&nbsp;<a href="/english/editNewWordList/{{$motto->id}}">单词</a>
+                    <td>{{$word->id}}</td>
+                    <td>{{$word->word}}</td>
+                    <td><a href="/english/editNewWord/{{$word->id}}">编辑</a>
                     </td>
                     <td>
-                        <form method="post" action="/api/english/del/{{$motto->id}}">
+                        <form method="post" action="/api/english/delWord/{{$word->id}}/mottoID/{{$word->mottoId}}">
                             <input type="hidden" name="_method" value="delete">
                             <button type="submit" class="btn btn-link" onclick="javascript:if(window.confirm('你确定删除？')){return true;}else{return false;}">删除</button></form>
                     </td>
@@ -39,7 +38,7 @@
 
                </table>
                 <div style="text-align: center">
-                    {{ $mottoList->links() }}
+                    {{ $wordList->links() }}
                 </div>
             </div>
             <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>

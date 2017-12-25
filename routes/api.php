@@ -32,3 +32,8 @@ Route::delete('/english/del/{id}','mottosController@delMotto');
 Route::get('/new','mottosController@getToday');
 Route::get('/show/{mottos}','mottosController@show');
 Route::get('/getAll','mottosController@GetALL');
+/*
+ * 单词管理相关业务逻辑
+ */
+Route::post('/english/addNewWord/{id}','newWordController@AddNewWord');
+Route::delete('/english/delWord/{id}/mottoID/{mottoID}','newWordController@DelNewWord');
