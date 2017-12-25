@@ -13,6 +13,7 @@
             <div class="container">
                 <h3 className="text-center">新词列表</h3>
                 <ol class="breadcrumb">
+                    <li><a href="/english/mottoList/">返回内容列表</a></li>
                     <li><a href="/english/addNewWord/{{$id}}">添加新词</a></li>
                 </ol>
                <table class="table table-bordered" style="margin-top: 20px">
@@ -26,7 +27,7 @@
                 <tr>
                     <td>{{$word->id}}</td>
                     <td>{{$word->word}}</td>
-                    <td><a href="/english/editNewWord/{{$word->id}}">编辑</a>
+                    <td><a href="/english/editNewWord/{{$word->id}}/mottoID/{{$id}}">编辑</a>
                     </td>
                     <td>
                         <form method="post" action="/api/english/delWord/{{$word->id}}/mottoID/{{$word->mottoId}}">

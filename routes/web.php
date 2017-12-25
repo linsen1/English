@@ -36,3 +36,7 @@ Route::get('/english/editNewWordList/{id}',function($id){
     $wordList=DB::table('new_words')->where('mottoId',$id)->orderBy('id','desc')->paginate(10);
     return view('english.newWordList',['wordList'=>$wordList,'id'=>$id]);
 });
+Route::get('/english/editNewWord/{id}/mottoID/{mottoID}',function ($id,$mottoID){
+    $word=DB::select('select * from  new_words where id=?',[$id]);
+    return view('english.editNewWord',['word'=>$word[0],'mottoID'=>$mottoID,'id'=>$id]);
+});

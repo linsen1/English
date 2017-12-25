@@ -29,4 +29,19 @@ class newWordController extends Controller
         $result=DB::table('new_words')->where('id',$id)->delete();
         return redirect('/english/editNewWordList/'.$mottoID);
     }
+    public function updateNewWord(Request $request,$id,$mottoID){
+        date_default_timezone_set("Asia/Chongqing");
+        $this->validate($request,[
+            'word'=>'required',
+            'yinbiao'=>'required',
+            'chinese'=>'required'
+        ]);
+        $word=$request->input('word');
+        $yinbiao=$request->input('yinbiao');
+        $chinese=$request->input('chinese');
+        $updated_at=date("Y-m-d H:i",time());
+        $infoResult=DB::table('new_words')->where('id',$id)->update(['word'=>$word,'chinese'=>$chinese,'yinbiao'=>$yinbiao,'updated_at'=>$updated_at]);
+        return redirect('/english/editNewWordList/'.$mottoID);
+
+    }
 }
