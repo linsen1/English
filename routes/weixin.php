@@ -11,3 +11,4 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 Route::post('/onLogin/{js_code}','weixinController@GetSessinID');
+Route::post('/getUserInfo','weixinController@GetUserInfo');
