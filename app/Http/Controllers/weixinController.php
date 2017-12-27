@@ -62,7 +62,7 @@ class weixinController extends Controller
     }
 
     public function GetSessinID($js_code){
-        $getSessionIDURL='https://api.weixin.qq.com/sns/jscode2session?appid='.$this->appids.'&secret='.$this->secret.'&js_code='.$js_code.'&grant_type=authorization_code';
+        $getSessionIDURL='https://api.weixin.qq.com/sns/jscode2session?appid='.$this->appid.'&secret='.$this->secret.'&js_code='.$js_code.'&grant_type=authorization_code';
         $curl=new Curl();
         $curl->get($getSessionIDURL);
         $result=$curl->response;
