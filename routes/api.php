@@ -38,3 +38,4 @@ Route::get('/getAll','mottosController@GetALL');
 Route::post('/english/addNewWord/{id}','newWordController@AddNewWord');
 Route::delete('/english/delWord/{id}/mottoID/{mottoID}','newWordController@DelNewWord');
 Route::put('/english/editNewWord/{id}/mottoID/{mottoID}','newWordController@updateNewWord');
+Route::get('/english/getword/{id}','newWordController@getNewWordList');

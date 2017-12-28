@@ -77,4 +77,8 @@ class newWordController extends Controller
         return redirect('/english/editNewWordList/'.$mottoID);
 
     }
+    public function getNewWordList($id){
+        $result=DB::table('new_words')->where('mottoId',$id)->get();
+        return  response()->json($result);
+    }
 }
