@@ -16,7 +16,10 @@ class CreateNewWordsTable extends Migration
         Schema::create('new_words', function (Blueprint $table) {
             $table->increments('id');
             $table->string('word');
-            $table->string('yinbiao');
+            $table->string('yinbiao');//英式发音
+            $table->string('yinbiaoMp3');
+            $table->string('yinbiao1');//美式发音
+            $table->string('yinbiao1Mp3');
             $table->string('chinese');
             $table->integer('mottoId');
             $table->timestamps();

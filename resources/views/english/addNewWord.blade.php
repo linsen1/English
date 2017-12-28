@@ -21,15 +21,33 @@
                           </div>
                       </div>
                       <div class="form-group">
-                          <label class="col-sm-2 control-label text-right" for="yinbiao">音标:</label>
+                          <label class="col-sm-2 control-label text-right" for="yinbiao">英式音标:</label>
                           <div class="col-sm-10">
                               <input type="text" class="form-control " id="yinbiao" name="yinbiao" >
                           </div>
                       </div>
                       <div class="form-group">
+                          <label class="col-sm-2 control-label text-right" for="yinbiaoMp3">英式MP3:</label>
+                          <div class="col-sm-10">
+                              <input type="text" class="form-control " id="yinbiaoMp3" name="yinbiaoMp3" >
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          <label class="col-sm-2 control-label text-right" for="yinbiao1">美式音标:</label>
+                          <div class="col-sm-10">
+                              <input type="text" class="form-control " id="yinbiao1" name="yinbiao1" >
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          <label class="col-sm-2 control-label text-right" for="yinbiao1Mp3">美式MP3:</label>
+                          <div class="col-sm-10">
+                              <input type="text" class="form-control " id="yinbiao1Mp3" name="yinbiao1Mp3" >
+                          </div>
+                      </div>
+                      <div class="form-group">
                           <label class="col-sm-2 control-label text-right" for="chinese">中文:</label>
                           <div class="col-sm-10">
-                              <input type="text" class="form-control " id="chinese" name="chinese" >
+                              <textarea class="form-control " id="chinese" name="chinese" rows="5"></textarea>
                           </div>
                       </div>
                       <div style="text-align: center">
