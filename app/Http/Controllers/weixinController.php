@@ -13,8 +13,8 @@ use Curl\Curl;
 
 class weixinController extends Controller
 {
-    private $appid='wxe9be027b8fafc3bc';
-    private $secret='e7c10f9969efb27e02531542ea7e0b89';
+    private $appid='wx5101c5c58f27a8b3';
+    private $secret='443b5665231ae7f587b10c20afd175ba';
     public $sessionKey;
     public $OK = 0;
     public $IllegalAesKey = -41001;

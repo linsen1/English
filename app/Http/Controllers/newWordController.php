@@ -70,10 +70,15 @@ class newWordController extends Controller
         ]);
         $word=$request->input('word');
         $yinbiao=$request->input('yinbiao');
+        $yinbiaoMp3=$request->input('yinbiaoMp3');
+        $yinbiao1=$request->input('yinbiao1');
+        $yinbiao1Mp3=$request->input('yinbiaoMp3');
         $chinese=$request->input('chinese');
 
         $updated_at=date("Y-m-d H:i",time());
-        $infoResult=DB::table('new_words')->where('id',$id)->update(['word'=>$word,'chinese'=>$chinese,'yinbiao'=>$yinbiao,'updated_at'=>$updated_at]);
+        $infoResult=DB::table('new_words')->where('id',$id)->update(['word'=>$word,'chinese'=>$chinese,'yinbiao'=>$yinbiao,
+            'yinbiaoMp3'=>$yinbiaoMp3,'yinbiao1'=>$yinbiao1,'yinbiao1Mp3'=>$yinbiao1Mp3,
+            'updated_at'=>$updated_at]);
         return redirect('/english/editNewWordList/'.$mottoID);
 
     }
