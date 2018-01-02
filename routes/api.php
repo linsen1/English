@@ -39,3 +39,8 @@ Route::post('/english/addNewWord/{id}','newWordController@AddNewWord');
 Route::delete('/english/delWord/{id}/mottoID/{mottoID}','newWordController@DelNewWord');
 Route::put('/english/editNewWord/{id}/mottoID/{mottoID}','newWordController@updateNewWord');
 Route::get('/english/getword/{id}','newWordController@getNewWordList');
+
+/*
+ * 用户信息管理相关业务
+ */
+Route::post('/english/addUser','EUsersController@AddUsers');
