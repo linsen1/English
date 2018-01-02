@@ -44,3 +44,5 @@ Route::get('/english/getword/{id}','newWordController@getNewWordList');
  * 用户信息管理相关业务
  */
 Route::post('/english/addUser','EUsersController@AddUsers');
+Route::post('/english/addMyMotto','MyMottosController@AddUserMotto');
+Route::post('/english/checkMyMotto/','MyMottosController@checkMyMotto');
