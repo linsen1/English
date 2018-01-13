@@ -22,39 +22,59 @@ class newWordController extends Controller
         $result=$curl->response;
         $result=json_decode($result,true);
         $word=$request->input('word');
-        $yinbiao="[".$result["symbols"][0]["ph_en"]."]";
-        $yinbiaoMp3=$result["symbols"][0]["ph_en_mp3"];
-        $yinbiao1="[".$result["symbols"][0]["ph_am"]."]";
-        $yinbiao1Mp3=$result["symbols"][0]["ph_am_mp3"];
-        $chinese=$result["symbols"][0]["parts"];
-        $chineseMean="";
-        foreach ($chinese as $key=>$value){
-            $chineseMean.=$value["part"]." ";
-            foreach ($value["means"] as $words)
-            {
-                $chineseMean.=$words." ;";
+        if($this->CheckWord($word)) {
+            $yinbiao = "[" . $result["symbols"][0]["ph_en"] . "]";
+            $yinbiaoMp3 = $result["symbols"][0]["ph_en_mp3"];
+            $yinbiao1 = "[" . $result["symbols"][0]["ph_am"] . "]";
+            $yinbiao1Mp3 = $result["symbols"][0]["ph_am_mp3"];
+            $chinese = $result["symbols"][0]["parts"];
+            $chineseMean = "";
+            foreach ($chinese as $key => $value) {
+                $chineseMean .= $value["part"] . " ";
+                foreach ($value["means"] as $words) {
+                    $chineseMean .= $words . " ;";
+                }
+                $chineseMean = rtrim($chineseMean, ";");
+                $chineseMean .= PHP_EOL;
             }
-            $chineseMean=rtrim($chineseMean,";");
-            $chineseMean.=PHP_EOL;
-        }
-        $chineseMean=rtrim($chineseMean,PHP_EOL);
+            $chineseMean = rtrim($chineseMean, PHP_EOL);
 
-        /*
-        $word=$request->input('word');
-        $yinbiao=$request->input('yinbiao');
-        $yinbiaoMp3=$request->input('yinbiaoMp3');
-        $yinbiao1=$request->input('yinbiao1');
-        $yinbiao1Mp3=$request->input('yinbiaoMp3');
-        $chinese=$request->input('chinese');
-        */
-        $created_at=date("Y-m-d H:i",time());
-        $updated_at=date("Y-m-d H:i",time());
-        $addResult=DB::table('new_words')->insert(
-            ['word'=>$word,'chinese'=>$chineseMean,'yinbiao'=>$yinbiao,'yinbiao1'=>$yinbiao1,
-                'yinbiaoMp3'=>$yinbiaoMp3,'yinbiao1Mp3'=>$yinbiao1Mp3,
-                'mottoId'=>$id,'created_at'=>$created_at,'updated_at'=>$updated_at]
-        );
-        return redirect('/english/editNewWordList/'.$id);
+            /*
+            $word=$request->input('word');
+            $yinbiao=$request->input('yinbiao');
+            $yinbiaoMp3=$request->input('yinbiaoMp3');
+            $yinbiao1=$request->input('yinbiao1');
+            $yinbiao1Mp3=$request->input('yinbiaoMp3');
+            $chinese=$request->input('chinese');
+            */
+            $created_at = date("Y-m-d H:i", time());
+            $updated_at = date("Y-m-d H:i", time());
+            $addResult = DB::table('new_words')->insert(
+                ['word' => $word, 'chinese' => $chineseMean, 'yinbiao' => $yinbiao, 'yinbiao1' => $yinbiao1,
+                    'yinbiaoMp3' => $yinbiaoMp3, 'yinbiao1Mp3' => $yinbiao1Mp3,
+                    'mottoId' => $id, 'created_at' => $created_at, 'updated_at' => $updated_at]
+            );
+            return redirect('/english/editNewWordList/' . $id);
+        }
+        else
+        {
+            $result=array(
+                'result'=>'the word was added'
+            );
+            return  response()->json($result);
+        }
+    }
+
+    public function CheckWord($word){
+        $count=DB::table('new_words')->where('word',$word)->count();
+        if($count>0)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
     }
 
     public function DelNewWord($id,$mottoID){
