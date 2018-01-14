@@ -30,6 +30,13 @@ class MyWordsController extends Controller
             return response()->json($result);
         }
     }//
+    public  function DelMyWords(Request $request){
+        $result=DB::table('my_words')->where([
+            ['openId','=',$request->input('openId')],
+            ['word_id','=',$request->input('word_id')]
+        ])->delete();
+        return response()->json($result);
+    }
     public  function CheckMyWords($userWords){
         $count=DB::table('my_words')->where([
             ['openId','=',$userWords['openId']],

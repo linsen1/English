@@ -46,5 +46,8 @@ Route::get('/english/getword/{id}','newWordController@getNewWordList');
 Route::post('/english/addUser','EUsersController@AddUsers');
 Route::post('/english/addMyMotto','MyMottosController@AddUserMotto');
 Route::post('/english/checkMyMotto/','MyMottosController@checkMyMotto');
+Route::post('/english/DelMyMotto/','MyMottosController@DelMyMotto');
+Route::post('/english/GetMyMottoList','MyMottosController@GetMyMottoList');
 Route::post('/english/AddMyWords','MyWordsController@AddMyWords');
 Route::post('/english/CheckIfMyWords','MyWordsController@CheckIfMyWords');
+

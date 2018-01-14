@@ -19,6 +19,9 @@ class MyMottosController extends Controller
                'created_at'=>date("Y-m-d H:i",time()),
                'updated_at'=>date("Y-m-d H:i",time())
            ]);
+           $result=array(
+               'result'=>$result
+           );
            return response()->json($result);
        }else
        {
@@ -40,6 +43,13 @@ class MyMottosController extends Controller
            return true;
        }
    }//
+    public  function DelMyMotto(Request $request){
+        $result=DB::table('my_mottos')->where([
+            ['openId','=',$request->input('openId')],
+            ['mottos_id','=',$request->input('mottos_id')]
+        ])->delete();
+        return response()->json($result);
+    }
    public function  checkMyMotto(Request $request){
        $count=DB::table('my_mottos')->where([
            ['openId','=',$request->input('openId')],
@@ -60,4 +70,11 @@ class MyMottosController extends Controller
            return response()->json($result);
        }
    }
+    public function GetMyMottoList(Request $request)
+    {
+        $newList=DB::table('my_mottos')->where([
+            ['openId','=',$request->input('openId')]
+        ])->leftJoin('mottos','my_mottos.mottos_id','=','mottos.id')->orderBy('mottos.id','desc')->paginate(5);
+        return response()->json($newList,201);
+    }
 }
