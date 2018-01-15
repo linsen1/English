@@ -26,6 +26,8 @@ Route::get('/english/editMotto/{id}',function ($id){
 Route::get('/motto/add', function () {
     return view('addmotto');
 });
+
+
 /*
  * 添加单词
  */
@@ -39,4 +41,8 @@ Route::get('/english/editNewWordList/{id}',function($id){
 Route::get('/english/editNewWord/{id}/mottoID/{mottoID}',function ($id,$mottoID){
     $word=DB::select('select * from  new_words where id=?',[$id]);
     return view('english.editNewWord',['word'=>$word[0],'mottoID'=>$mottoID,'id'=>$id]);
+});
+
+Route::get('/english/addVideo',function (){
+    return view('english.addNewVideo');
 });

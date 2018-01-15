@@ -51,3 +51,10 @@ Route::post('/english/GetMyMottoList','MyMottosController@GetMyMottoList');
 Route::post('/english/AddMyWords','MyWordsController@AddMyWords');
 Route::post('/english/CheckIfMyWords','MyWordsController@CheckIfMyWords');
 
+/*
+ * 添加视频逻辑
+ */
+Route::post('/english/addNewVideo','VideosController@addNewVideos');
+Route::get('/english/newVideo','VideosController@getNewVideo');
+Route::get('/english/getVideoList','VideosController@getVideoList');
+
