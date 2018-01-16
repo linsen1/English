@@ -57,4 +57,7 @@ Route::post('/english/CheckIfMyWords','MyWordsController@CheckIfMyWords');
 Route::post('/english/addNewVideo','VideosController@addNewVideos');
 Route::get('/english/newVideo','VideosController@getNewVideo');
 Route::get('/english/getVideoList','VideosController@getVideoList');
+Route::put("/english/updateVideo/{id}",'VideosController@updateVideo');
+Route::delete('/english/delVideo/{id}','VideosController@delVideo');
+Route::get('/english/showVideo/{Video}','VideosController@showVideo');
 

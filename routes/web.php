@@ -46,3 +46,12 @@ Route::get('/english/editNewWord/{id}/mottoID/{mottoID}',function ($id,$mottoID)
 Route::get('/english/addVideo',function (){
     return view('english.addNewVideo');
 });
+Route::get('/english/videosList',function (){
+    $videosList=DB::table('videos')->orderBy('id','desc')->paginate(5);
+    return view('english.videosList',['videosList'=>$videosList]);
+});
+Route::get('/english/editVideoInfo/{id}',function($id){
+    $videoinfo=DB::table('videos')->where('id',$id)->get();
+    return view('english.editVideoInfo',['videoinfo'=>$videoinfo,'id'=>$id]);
+
+});
