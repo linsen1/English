@@ -10,7 +10,7 @@ use Curl\Curl;
 class newWordController extends Controller
 {
     public $jinshanKey='0FA30ACFE4C4605FB4BB36218256E560';
-    public  function  AddNewWord(Request $request,$id){
+    public  function  AddNewWord(Request $request,$id,$no){
         date_default_timezone_set("Asia/Chongqing");
         $this->validate($request,[
             'word'=>'required'
@@ -52,9 +52,11 @@ class newWordController extends Controller
             $addResult = DB::table('new_words')->insert(
                 ['word' => $word, 'chinese' => $chineseMean, 'yinbiao' => $yinbiao, 'yinbiao1' => $yinbiao1,
                     'yinbiaoMp3' => $yinbiaoMp3, 'yinbiao1Mp3' => $yinbiao1Mp3,
-                    'mottoId' => $id, 'created_at' => $created_at, 'updated_at' => $updated_at]
+                    'mottoId' => $id, 'created_at' => $created_at, 'updated_at' => $updated_at,'type'=>$no]
             );
-            return redirect('/english/editNewWordList/' . $id);
+
+            return redirect('/english/editNewWordList/' . $id.'/type/'.$no);
+
         }
         else
         {
@@ -77,11 +79,11 @@ class newWordController extends Controller
         }
     }
 
-    public function DelNewWord($id,$mottoID){
+    public function DelNewWord($id,$mottoID,$type){
         $result=DB::table('new_words')->where('id',$id)->delete();
-        return redirect('/english/editNewWordList/'.$mottoID);
+        return redirect('/english/editNewWordList/'.$mottoID.'/type/'.$type);
     }
-    public function updateNewWord(Request $request,$id,$mottoID){
+    public function updateNewWord(Request $request,$id,$mottoID,$type){
         date_default_timezone_set("Asia/Chongqing");
         $this->validate($request,[
             'word'=>'required',
@@ -98,12 +100,16 @@ class newWordController extends Controller
         $updated_at=date("Y-m-d H:i",time());
         $infoResult=DB::table('new_words')->where('id',$id)->update(['word'=>$word,'chinese'=>$chinese,'yinbiao'=>$yinbiao,
             'yinbiaoMp3'=>$yinbiaoMp3,'yinbiao1'=>$yinbiao1,'yinbiao1Mp3'=>$yinbiao1Mp3,
-            'updated_at'=>$updated_at]);
-        return redirect('/english/editNewWordList/'.$mottoID);
+            'updated_at'=>$updated_at,'type'=>$type]);
+        return redirect('/english/editNewWordList/'.$mottoID.'/type/'.$type);
 
     }
     public function getNewWordList($id){
-        $result=DB::table('new_words')->where('mottoId',$id)->get();
+        $result=DB::table('new_words')->where(['mottoId'=>$id,'type'=>0])->get();
+        return  response()->json($result);
+    }
+    public function getVideoWordList($id){
+        $result=DB::table('new_words')->where(['mottoId'=>$id,'type'=>1])->get();
         return  response()->json($result);
     }
 }

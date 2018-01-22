@@ -35,10 +35,11 @@ Route::get('/getAll','mottosController@GetALL');
 /*
  * 单词管理相关业务逻辑
  */
-Route::post('/english/addNewWord/{id}','newWordController@AddNewWord');
-Route::delete('/english/delWord/{id}/mottoID/{mottoID}','newWordController@DelNewWord');
-Route::put('/english/editNewWord/{id}/mottoID/{mottoID}','newWordController@updateNewWord');
+Route::post('/english/addNewWord/{id}/{no}','newWordController@AddNewWord');
+Route::delete('/english/delWord/{id}/mottoID/{mottoID}/type/{type}','newWordController@DelNewWord');
+Route::put('/english/editNewWord/{id}/mottoID/{mottoID}/type/{type}','newWordController@updateNewWord');
 Route::get('/english/getword/{id}','newWordController@getNewWordList');
+Route::get('/english/getVideoWord/{id}','newWordController@getVideoWordList');
 
 /*
  * 用户信息管理相关业务

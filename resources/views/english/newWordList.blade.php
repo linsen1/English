@@ -13,8 +13,12 @@
             <div class="container">
                 <h3 className="text-center">新词列表</h3>
                 <ol class="breadcrumb">
-                    <li><a href="/english/mottoList/">返回内容列表</a></li>
-                    <li><a href="/english/addNewWord/{{$id}}">添加新词</a></li>
+                    <?php if($id==0){
+                    echo '<li><a href="/english/mottoList/">返回内容列表</a></li>';}
+                    else{
+                        echo'<li><a href="/english/videosList/">返回内容列表</a></li>';
+                        }?>
+                    <li><a href="/english/addNewWord/{{$id}}/type/{{$no}}">添加新词</a></li>
                 </ol>
                <table class="table table-bordered" style="margin-top: 20px">
                 <tr>
@@ -27,10 +31,10 @@
                 <tr>
                     <td>{{$word->id}}</td>
                     <td>{{$word->word}}</td>
-                    <td><a href="/english/editNewWord/{{$word->id}}/mottoID/{{$id}}">编辑</a>
+                    <td><a href="/english/editNewWord/{{$word->id}}/mottoID/{{$id}}/type/{{$no}}">编辑</a>
                     </td>
                     <td>
-                        <form method="post" action="/api/english/delWord/{{$word->id}}/mottoID/{{$word->mottoId}}">
+                        <form method="post" action="/api/english/delWord/{{$word->id}}/mottoID/{{$word->mottoId}}/type/{{$no}}">
                             <input type="hidden" name="_method" value="delete">
                             <button type="submit" class="btn btn-link" onclick="javascript:if(window.confirm('你确定删除？')){return true;}else{return false;}">删除</button></form>
                     </td>

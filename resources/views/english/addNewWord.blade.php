@@ -13,7 +13,7 @@
             <div class="container">
                 <h3 class="text-center">添加内容</h3>
                 <div style="text-align: left;margin-top: 10px">
-                  <form class="form-horizontal" method="post" action="/api/english/addNewWord/{{$id}}" >
+                  <form class="form-horizontal" method="post" action="/api/english/addNewWord/{{$id}}/{{$no}}" >
                       <div class="form-group">
                       <label class="col-sm-2 control-label text-right" for="word">单词:</label>
                           <div class="col-sm-10">
