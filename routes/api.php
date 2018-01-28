@@ -70,3 +70,4 @@ Route::get('/english/getArticleList','ArticleControllers@getArticleList');
 Route::get('/english/showArticle/{Article}','ArticleControllers@showArticle');
 Route::put('/english/editArticleInfo/{id}','ArticleControllers@updateArticle');
 Route::delete('/english/delArticle/{id}','ArticleControllers@delArticle');
+Route::get('/english/getArticleWord/{id}','newWordController@getArticleWordList');

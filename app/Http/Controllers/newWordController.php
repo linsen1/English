@@ -112,4 +112,8 @@ class newWordController extends Controller
         $result=DB::table('new_words')->where(['mottoId'=>$id,'type'=>1])->get();
         return  response()->json($result);
     }
+    public function getArticleWordList($id){
+        $result=DB::table('articles')->where(['mottoId'=>$id,'type'=>1])->get();
+        return  response()->json($result);
+    }
 }
