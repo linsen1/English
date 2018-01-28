@@ -61,4 +61,12 @@ Route::get('/english/getVideoList','VideosController@getVideoList');
 Route::put("/english/updateVideo/{id}",'VideosController@updateVideo');
 Route::delete('/english/delVideo/{id}','VideosController@delVideo');
 Route::get('/english/showVideo/{Video}','VideosController@showVideo');
-
+/*
+ * 添加美文相关逻辑
+ */
+Route::post('/english/addNewArticle','ArticleControllers@addNewArticle');
+Route::get('/english/NewArticle','ArticleControllers@getNewArticle');
+Route::get('/english/getArticleList','ArticleControllers@getArticleList');
+Route::get('/english/showArticle/{Article}','ArticleControllers@showArticle');
+Route::put('/english/editArticleInfo/{id}','ArticleControllers@updateArticle');
+Route::delete('/english/delArticle/{id}','ArticleControllers@delArticle');

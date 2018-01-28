@@ -53,5 +53,17 @@ Route::get('/english/videosList',function (){
 Route::get('/english/editVideoInfo/{id}',function($id){
     $videoinfo=DB::table('videos')->where('id',$id)->get();
     return view('english.editVideoInfo',['videoinfo'=>$videoinfo,'id'=>$id]);
+});
 
+//美文添加逻辑
+Route::get('/english/addNewArticle',function(){
+    return view('english.addNewArticle');
+});
+Route::get('/english/articleList',function(){
+    $articles=DB::table('articles')->orderBy('id','desc')->paginate(5);
+    return view('english.articleList',['articles'=>$articles]);
+});
+Route::get('/english/editArticleInfo/{id}',function($id){
+    $articleinfo=DB::table('articles')->where('id',$id)->get();
+    return view('english.editArticleInfo',['articleInfo'=>$articleinfo,'id'=>$id]);
 });

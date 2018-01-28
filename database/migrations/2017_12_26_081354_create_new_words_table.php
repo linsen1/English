@@ -22,6 +22,7 @@ class CreateNewWordsTable extends Migration
             $table->string('yinbiao1Mp3');
             $table->string('chinese');
             $table->integer('mottoId');
+            $table->integer('type');
             $table->timestamps();
         });
     }
