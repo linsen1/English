@@ -113,7 +113,7 @@ class newWordController extends Controller
         return  response()->json($result);
     }
     public function getArticleWordList($id){
-        $result=DB::table('articles')->where(['mottoId'=>$id,'type'=>1])->get();
+        $result=DB::table('new_words')->where(['mottoId'=>$id,'type'=>2])->get();
         return  response()->json($result);
     }
 }
