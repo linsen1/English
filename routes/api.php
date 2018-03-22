@@ -71,3 +71,7 @@ Route::get('/english/showArticle/{Article}','ArticleControllers@showArticle');
 Route::put('/english/editArticleInfo/{id}','ArticleControllers@updateArticle');
 Route::delete('/english/delArticle/{id}','ArticleControllers@delArticle');
 Route::get('/english/getArticleWord/{id}','newWordController@getArticleWordList');
+
+Route::post('/sms/send','smsController@sendSms');
+Route::get('/sms/vcode','smsController@sendVcode');
+Route::get('/sms/getcode/{phone}','smsController@getCode');
