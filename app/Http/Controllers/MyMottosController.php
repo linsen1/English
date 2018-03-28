@@ -10,14 +10,16 @@ class MyMottosController extends Controller
        date_default_timezone_set("Asia/Chongqing");
        $userMottos=array(
            'openId'=>$request->input('openId'),
-           'mottos_id'=>$request->input('mottos_id')
+           'mottos_id'=>$request->input('mottos_id'),
+           'type'=>$request->input('type',0)
        );
        if($this->checkUserMotto($userMottos)){
            $result=DB::table('my_mottos')->insert([
                'openId'=>$request->input('openId'),
                'mottos_id'=>$request->input('mottos_id'),
-               'created_at'=>date("Y-m-d H:i",time()),
-               'updated_at'=>date("Y-m-d H:i",time())
+               'type'=>$request->input('type',0),
+               'created_at'=>date("Y-m-d H:i:s",time()),
+               'updated_at'=>date("Y-m-d H:i:s",time())
            ]);
            $result=array(
                'result'=>$result
@@ -35,6 +37,7 @@ class MyMottosController extends Controller
        $count=DB::table('my_mottos')->where([
            ['openId','=',$mottos['openId']],
            ['mottos_id','=',$mottos['mottos_id']],
+           ['type','=',$mottos['type']]
        ])->count();
        if($count>0){
            return false;
@@ -46,7 +49,8 @@ class MyMottosController extends Controller
     public  function DelMyMotto(Request $request){
         $result=DB::table('my_mottos')->where([
             ['openId','=',$request->input('openId')],
-            ['mottos_id','=',$request->input('mottos_id')]
+            ['mottos_id','=',$request->input('mottos_id')],
+            ['type','=',$request->input('type','0')]
         ])->delete();
         return response()->json($result);
     }
@@ -54,6 +58,7 @@ class MyMottosController extends Controller
        $count=DB::table('my_mottos')->where([
            ['openId','=',$request->input('openId')],
            ['mottos_id','=',$request->input('mottos_id')],
+           ['type','=',$request->input('type',0)]
        ])->count();
        //已收藏1代表
        if($count>0){
@@ -72,9 +77,36 @@ class MyMottosController extends Controller
    }
     public function GetMyMottoList(Request $request)
     {
-        $newList=DB::table('my_mottos')->where([
-            ['openId','=',$request->input('openId')]
-        ])->leftJoin('mottos','my_mottos.mottos_id','=','mottos.id')->orderBy('mottos.id','desc')->paginate(5);
-        return response()->json($newList,201);
+        $type=$request->input('type',0);
+        if($type==0) {
+            $newList = DB::table('my_mottos')
+                ->Join('mottos', 'my_mottos.mottos_id', '=', 'mottos.id')
+                ->where([
+                    ['my_mottos.openId', '=', $request->input('openId')],
+                    ['my_mottos.type','=',0]
+                ])
+                ->orderBy('mottos.id', 'desc')->paginate(5);
+            return response()->json($newList, 201);
+        }
+        elseif ($type==1){
+            $newList = DB::table('my_mottos')->Join('articles', 'my_mottos.mottos_id', '=', 'articles.id')
+                ->where([
+                    ['my_mottos.openId', '=', $request->input('openId')],
+                    ['my_mottos.type','=',1]
+                ])
+                ->orderBy('articles.id', 'desc')->paginate(5);
+            return response()->json($newList, 201);
+        }
+        else
+        {
+            $newList = DB::table('my_mottos')->Join('videos', 'my_mottos.mottos_id', '=', 'videos.id')
+                ->where([
+                    ['my_mottos.openId', '=', $request->input('openId')],
+                    ['my_mottos.type','=',2]
+                ])
+                ->orderBy('videos.id', 'desc')->paginate(5);
+            return response()->json($newList, 201);
+        }
     }
+
 }

@@ -17,6 +17,7 @@ class CreateMyMottosTable extends Migration
             $table->increments('id');
             $table->string('openId');
             $table->integer('mottos_id');
+            $table->integer('type');//0 名句 1 文章 2 影视
             $table->timestamps();
         });
     }
