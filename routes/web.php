@@ -67,3 +67,18 @@ Route::get('/english/editArticleInfo/{id}',function($id){
     $articleinfo=DB::table('articles')->where('id',$id)->get();
     return view('english.editArticleInfo',['articleInfo'=>$articleinfo,'id'=>$id]);
 });
+
+//添加短语逻辑
+Route::get('/english/editSentenceList/{RefID}/type/{no}',function($RefID,$no){
+    $SentenceList=DB::table('sentences')->where(['refID'=>$RefID,'type'=>$no])->orderBy('id','desc')->paginate(10);
+    return view('english.SentenceList',['SentenceList'=>$SentenceList,'RefID'=>$RefID,'no'=>$no]);
+});
+Route::get('/english/addNewSentence/{refID}/type/{type}',function ($refID,$type){
+    return view('english.addNewSentence',['refID'=>$refID,'type'=>$type]);
+});
+Route::get('/english/editSentence/id/{id}/refID/{refID}/type/{type}',function ($id,$refID,$type){
+
+    $sentenceInfo=DB::table('sentences')->where('id',$id)->get();
+    //return response()->json($sentenceInfo);
+    return view('english.editSentence',['sentenceInfo'=>$sentenceInfo[0],'refID'=>$refID,'type'=>$type,'id'=>$id]);
+});

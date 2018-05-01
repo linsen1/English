@@ -26,8 +26,11 @@
             <tr>
                 <td>{{$article->id}}</td>
                 <td>{{$article->title}}</td>
-                <td><a href="/english/editArticleInfo/{{$article->id}}">美文</a>&nbsp;&nbsp;
-                    <a href="/english/editNewWordList/{{$article->id}}/type/2">单词</a> </td>
+                <td>
+                    &nbsp;<a href="/english/editArticleInfo/{{$article->id}}">美文</a>&nbsp;&nbsp;
+                    &nbsp;<a href="/english/editNewWordList/{{$article->id}}/type/2">单词</a>
+                    &nbsp; &nbsp; &nbsp;<a href="/english/editSentenceList/{{$article->id}}/type/2">短语</a>
+                </td>
                 <td>
                     <form method="post" action="/api/english/delArticle/{{$article->id}}">
                         <input type="hidden" name="_method" value="DELETE">

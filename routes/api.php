@@ -75,3 +75,9 @@ Route::get('/english/getArticleWord/{id}','newWordController@getArticleWordList'
 Route::post('/sms/send','smsController@sendSms');
 Route::get('/sms/vcode','smsController@sendVcode');
 Route::get('/sms/getcode/{phone}','smsController@getCode');
+
+//短语操作相关API
+Route::post('/english/addNewSentence/refID/{refID}/type/{type}','SentenceController@addSentence');
+Route::delete('/english/delsentence/id/{id}/refID/{refID}/type/{type}','SentenceController@delSentence');
+Route::put('/english/updateSentence/id/{id}/refID/{refID}/type/{type}','SentenceController@updateSentence');
+Route::get('/english/getSentence/refID/{refID}/type/{type}','SentenceController@getSentenceByID');

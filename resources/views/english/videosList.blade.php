@@ -27,7 +27,10 @@
                 <td>{{$video->id}}</td>
                 <td>{{$video->video_title}}</td>
                 <td><a href="/english/editVideoInfo/{{$video->id}}">影视</a>&nbsp;&nbsp;
-                    <a href="/english/editNewWordList/{{$video->id}}/type/1">单词</a> </td>
+                    <a href="/english/editNewWordList/{{$video->id}}/type/1">单词</a>
+                    &nbsp; &nbsp;<a href="/english/editSentenceList/{{$video->id}}/type/1">短语</a>
+                </td>
+                &nbsp;
                 <td>
                     <form method="post" action="/api/english/delVideo/{{$video->id}}">
                         <input type="hidden" name="_method" value="DELETE">

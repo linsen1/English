@@ -28,6 +28,7 @@
                     <td>{{$motto->englishWord}}</td>
                     <td><a href="/english/editMotto/{{$motto->id}}">短句</a>
                     &nbsp;&nbsp;<a href="/english/editNewWordList/{{$motto->id}}/type/0">单词</a>
+                        &nbsp;&nbsp;<a href="/english/editSentenceList/{{$motto->id}}/type/0">短语</a>
                     </td>
                     <td>
                         <form method="post" action="/api/english/del/{{$motto->id}}">
