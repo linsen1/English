@@ -45,6 +45,8 @@ Route::get('/english/getVideoWord/{id}','newWordController@getVideoWordList');
  * 用户信息管理相关业务
  */
 Route::post('/english/addUser','EUsersController@AddUsers');
+Route::post('/english/onlyAddUserOpenid','EUsersController@onlyAddUserOpenid');
+Route::post('/english/getUserInfo','EUsersController@getUserInfoByID');
 Route::post('/english/addMyMotto','MyMottosController@AddUserMotto');
 Route::post('/english/checkMyMotto/','MyMottosController@checkMyMotto');
 Route::post('/english/DelMyMotto/','MyMottosController@DelMyMotto');
@@ -72,9 +74,9 @@ Route::put('/english/editArticleInfo/{id}','ArticleControllers@updateArticle');
 Route::delete('/english/delArticle/{id}','ArticleControllers@delArticle');
 Route::get('/english/getArticleWord/{id}','newWordController@getArticleWordList');
 
-Route::post('/sms/send','smsController@sendSms');
-Route::get('/sms/vcode','smsController@sendVcode');
-Route::get('/sms/getcode/{phone}','smsController@getCode');
+Route::post('/english/sms/send','smsController@sendSms');
+Route::get('/english/sms/vcode','smsController@sendVcode');
+Route::get('/english/sms/getcode/{phone}','smsController@getCode');
 
 //短语操作相关API
 Route::post('/english/addNewSentence/refID/{refID}/type/{type}','SentenceController@addSentence');

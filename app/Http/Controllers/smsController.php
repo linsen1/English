@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\sms;
-use App\commonHelper\SignatureHelper;
+use App\aliHelper\SignatureHelper;
 use App\commonHelper\vcodeHelper;
 use Illuminate\Support\Facades\DB;
 
@@ -12,7 +12,6 @@ class smsController extends Controller
 {
     //发送短信及验证码
   public function sendSms(Request $request){
-      $vcode=$request->input('code');
       $smsInfo=new sms();
       $smsInfo->PhoneNumbers=$request->input('phone');
       $smsInfo->accessKeyId=config('sms.ali.accessKeyId');
@@ -20,7 +19,7 @@ class smsController extends Controller
       $smsInfo->SignName=config('sms.ali.SignName');
       $smsInfo->TemplateCode_30=config('sms.ali.TemplateCode_30');
       $smsInfo->TemplateParam=Array (
-          "code" =>'13456'
+          "code" =>$request->input('code')
       );
       $smsInfo->OutId=(string)time();
       if(!empty($smsInfo->TemplateParam) && is_array($smsInfo->TemplateParam)) {

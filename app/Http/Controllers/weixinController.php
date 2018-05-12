@@ -69,6 +69,15 @@ class weixinController extends Controller
         return response($result);
     }
 
+    public function OnlyGetOpenID(Request $request){
+        $js_code=$request->input("code");
+        $getSessionIDURL='https://api.weixin.qq.com/sns/jscode2session?appid='.$this->appid.'&secret='.$this->secret.'&js_code='.$js_code.'&grant_type=authorization_code';
+        $curl=new Curl();
+        $curl->get($getSessionIDURL);
+        $result=$curl->response;
+        return response($result);
+    }
+
     public function GetUserInfo(Request $request){
         $this->sessionKey =$request->input("sessionKey");
         $encryptedData=$request->input("encryptedData");

@@ -5,7 +5,7 @@
  * Date: 2018/3/22
  * Time: 下午12:13
  */
-namespace App\commonHelper;
+namespace App\aliHelper;
 class SignatureHelper {
 
     /**
