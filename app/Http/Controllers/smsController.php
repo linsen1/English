@@ -11,15 +11,15 @@ use Illuminate\Support\Facades\DB;
 class smsController extends Controller
 {
     //发送短信及验证码
-  public function sendSms(Request $request){
+  public function sendSms($phone,$code){
       $smsInfo=new sms();
-      $smsInfo->PhoneNumbers=$request->input('phone');
+      $smsInfo->PhoneNumbers=$phone;
       $smsInfo->accessKeyId=config('sms.ali.accessKeyId');
       $smsInfo->accessKeySecret=config('sms.ali.accessKeySecret');
       $smsInfo->SignName=config('sms.ali.SignName');
       $smsInfo->TemplateCode_30=config('sms.ali.TemplateCode_30');
       $smsInfo->TemplateParam=Array (
-          "code" =>$request->input('code')
+          "code" =>$code
       );
       $smsInfo->OutId=(string)time();
       if(!empty($smsInfo->TemplateParam) && is_array($smsInfo->TemplateParam)) {
@@ -131,5 +131,107 @@ class smsController extends Controller
       $msg['statusCode']=$infoMsg;
       $msg['code']=$code;
      return response()->json($msg);
+  }
+
+  public  function sendCode(Request $request){
+      $phone=$request->input('phone');
+      $IP=$request->getClientIp();
+      $result=array();
+      $result['data']='';
+      $result['erro']='';
+      if($this->validatePhoneSmsNo($phone)&&$this->validatePhoneNOIP($IP)){
+          $checkPhone=DB::table("phone_codes")->where([
+              ['phone','=',$phone]
+          ])->count();
+          //判断短信发送记录表里是否有该手机号,如果有
+          if($checkPhone>0){
+              //判断验证码的有效期是否超过30分钟
+              $checkTime=DB::table("phone_codes")->where([
+                  ['phone','=',$phone],
+                  ['endTime','>',date("Y-m-d H:i:s",time())]
+              ])->count();
+              //没有超过30分钟
+              if($checkTime>0){
+                  $result['data']='读取一条记录';
+                  $code=$this->getPhoneCode($phone)->{'code'};
+                  $this->InsertPhoneCodeLog($phone,$IP,$code);
+                  $this->sendSms($phone,$code);
+              }else{
+                  $code=$this->getCodes();
+                  $this->InsertPhoneCodeLog($phone,$IP,$code);
+                  $this->sendSms($phone,$code);
+                  $result['data']="新增加一条记录";
+              }
+          }
+          //新手机号
+          else
+          {
+              $code=$this->getCodes();
+              $this->InsertPhoneCodeLog($phone,$IP,$code);
+              $this->sendSms($phone,$code);
+              $result['data']="新增加一条记录：";
+          }
+      }else{
+          $result['erro']='手机号数量超限制或者短信数量超限制'.$this->validatePhoneNOIP1($IP);
+      }
+      return response()->json($result);
+  }
+  //插入发送日志
+  public function  InsertPhoneCodeLog($phone,$IP,$code)
+  {
+      $info=DB::table("phone_codes")->insert([
+          'phone'=>$phone,
+          'UserIP'=>$IP,
+          'code'=>$code,
+          'updated_at'=>date("Y-m-d H:i:s",time()),
+          'Created_at'=>date("Y-m-d H:i:s",time()),
+          'endTime'=>date("Y-m-d H:i:s",strtotime("+30 minute"))
+      ]);
+      return $info;
+  }
+  //读取验证码
+  public function  getPhoneCode($phone){
+      $code=DB::table('phone_codes')->select('code')->where([
+          ['phone','=',$phone]
+      ])->orderBy('id','desc')->first();
+      return $code;
+  }
+  //判断同一个手机号当天请求验证码不能超过10次
+  public function validatePhoneSmsNo($phone){
+      $result=DB::table("phone_codes")->where([
+         ['phone','=',$phone],
+         ['created_at','>',date("Y-m-d",time())]
+      ])->count();
+      if($result>config('sms.rule.onePhoneMaxSmsNoInOneDay')){
+          return false;
+      }else
+      {
+          return true;
+      }
+  }
+  public function validatePhoneNOIP($IP){
+      $result=DB::table("phone_codes")->where([
+          ['UserIP','=',$IP],
+          ['created_at','>',date("Y-m-d",time())]
+      ])->groupBy('phone')->count();
+
+      if($result>config('sms.rule.oneIPMaxPhoneNOInOneDay')){
+
+         return false;
+      }else{
+          return true;
+      }
+  }
+
+    public function validatePhoneNOIP1($IP){
+        $result=DB::table("phone_codes")->where([
+            ['UserIP','=',$IP],
+            ['created_at','>',date("Y-m-d",time())]
+        ])->groupBy('phone')->count();
+
+        return $result;
+    }
+  public  function  getCodes(){
+      return random_int(1000, 9999);
   }
 }

@@ -10,6 +10,13 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+use App\symbol;
+use App\symbolContent;
+use App\symbolWordsgroup;
+use App\SymbolWord;
+USE App\symbolPhrase;
+use App\symbolSentence;
+use App\Song;
 
 Route::get('/english/mottoAdd', function () {
     return view('welcome');
@@ -81,4 +88,102 @@ Route::get('/english/editSentence/id/{id}/refID/{refID}/type/{type}',function ($
     $sentenceInfo=DB::table('sentences')->where('id',$id)->get();
     //return response()->json($sentenceInfo);
     return view('english.editSentence',['sentenceInfo'=>$sentenceInfo[0],'refID'=>$refID,'type'=>$type,'id'=>$id]);
+});
+
+//音标业务模块
+Route::prefix('english/symbol')->group(function () {
+    Route::get('symbolList', function () {
+        $symbolList=DB::table('symbols')->orderBy('id','desc')->paginate(10);
+        return view('english.symbolList',['symbols'=>$symbolList]);
+        // Matches The "/admin/users" URL
+    });
+    Route::get("addSymbol",function (){
+       return view('english.addSymbol');
+    });
+    Route::get("editSymbol/{id}",function ($id){
+        $symbol=Symbol::find($id);
+        return view("english.editSymbol",["symbol"=>$symbol]);
+    });
+    //添加音标基本内容
+    Route::get("addSymbolContent/{id}",function ($id){
+       return view('english.addSymbolContent',["id"=>$id]);
+    });
+    //编辑音标基本内容
+    Route::get("editSymbolContent/{id}",function ($id){
+        $symbolContent=SymbolContent::find($id);
+        return view('english.editSymbolContent',["id"=>$id,"symbolContent"=>$symbolContent]);
+    });
+    //音标基本内容管理
+    Route::get("symbolContentList/{id}",function ($id){
+        $symbolContent=SymbolContent::where('symbol_id',$id)->paginate(10);
+       return view('english.symbolContentList',['id'=>$id,"symbolContent"=>$symbolContent]);
+    });
+    //字母组合列表
+    Route::get("wordsGroupList/{id}",function ($id){
+        $symbolWordsgroup=SymbolWordsgroup::where("symbol_id",$id)->paginate(10);
+        return view('english.wordsGroupList',["id"=>$id,"symbolWordsgroup"=>$symbolWordsgroup]);
+    });
+    Route::get("addWordsgroup/{id}",function ($id){
+        return view('english.addWordsgroup',["id"=>$id]);
+    });
+    Route::get("editWordsGroup/{id}/PID/{PID}",function ($id,$PID){
+        $symbolWordsgroup=SymbolWordsgroup::find($id);
+        return view('english.editWordsGroup',["id"=>$id,"PID"=>$PID,"symbolWordsgroup"=>$symbolWordsgroup]);
+    });
+    //单词管理列表
+    Route::get("symbolWordsList/{id}",function ($id){
+        $symbolWordsList=SymbolWord::where("symbol_id",$id)->paginate(10);
+        return view("english.symbolWordsList",["id"=>$id,"symbolWordsList"=>$symbolWordsList]);
+    });
+    //添加单词
+    Route::get("addsymbolWords/{id}",function ($id){
+        return view("english.addsymbolWords",["id"=>$id]);
+    });
+    Route::get("editsymbolWord/{id}/PID/{PID}",function ($id,$PID){
+        $symbolWord=SymbolWord::find($id);
+       return view("english.editsymbolWord",["id"=>$id,"PID"=>$PID,"symbolWord"=>$symbolWord]);
+    });
+
+    //短语管理
+    Route::get("symbolPhraseList/{id}",function ($id){
+        $symbolPhraseList=SymbolPhrase::where("symbol_id",$id)->paginate(10);
+        return view("english.symbolPhraseList",["id"=>$id,"symbolPhraseList"=>$symbolPhraseList]);
+    });
+    Route::get("addSymbolPhrase/{id}",function ($id){
+        return view("english.addSymbolPhrase",["id"=>$id]);
+    });
+    Route::get("editSymbolPhrase/{id}/PID/{PID}",function ($id,$PID){
+        $symbolPhrase=SymbolPhrase::find($id);
+        return view("english.editSymbolPhrase",["id"=>$id,"PID"=>$PID,"symbolPhrase"=>$symbolPhrase]);
+    });
+    //句子相关业务模块
+    Route::get("symbolSentenceList/{id}",function ($id){
+        $symbolSentenceList=SymbolSentence::where("symbol_id",$id)->paginate(10);
+        return view("english.symbolSentenceList",["id"=>$id,"symbolSentenceList"=>$symbolSentenceList]);
+    });
+    Route::get("addSymbolSentence/{id}",function ($id){
+        return view("english.addSymbolSentence",["id"=>$id]);
+    });
+    Route::get("editSymbolSentence/{id}/PID/{PID}",function ($id,$PID){
+        $symbolSentence=SymbolSentence::find($id);
+        return view("english.editSymbolSentence",["id"=>$id,"PID"=>$PID,"symbolSentence"=>$symbolSentence]);
+    });
+
+    //音乐相关业务
+    Route::get("songsList/{id}",function ($id){
+        $songsList=Song::where([
+            ["ref_id","=",$id],
+            ["type","=",0]
+        ])->paginate(10);
+        return view("english.songsList",["id"=>$id,"songsList"=>$songsList]);
+    });
+
+    Route::get("addSong/{id}",function ($id){
+        return view("english.addSong",["id"=>$id]);
+    });
+    Route::get("editSong/{id}/PID/{PID}",function ($id,$PID){
+        $song=Song::find($id);
+        return view("english.editSong",["id"=>$id,"PID"=>$PID,"song"=>$song]);
+    });
+
 });

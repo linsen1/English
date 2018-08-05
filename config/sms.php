@@ -13,5 +13,10 @@ return [
       'TemplateCode'=>'SMS_128580008',
       'TemplateCode_30'=>'SMS_127164363',
       'domain'=>'dysmsapi.aliyuncs.com'
+  ],
+  'rule'=>[
+      'onePhoneMaxSmsNoInOneDay'=>4,//同一个手机号一天最多下发10条短信
+      'oneIPMaxPhoneNOInOneDay'=>20,//同一个IP，请求的手机数量最多10条
+      'OneCodeMaxTime'=>30//验证码有效期30分钟，在重新生成
   ]
 ];

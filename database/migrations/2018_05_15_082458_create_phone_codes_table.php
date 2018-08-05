@@ -15,10 +15,10 @@ class CreatePhoneCodesTable extends Migration
     {
         Schema::create('phone_codes', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('phone');
-            $table->string('code');
-            $table->dateTime('endTime');
-            $table->integer('softDel');//0 有效 1 删除
+            $table->string('phone')->comment('手机号码');
+            $table->string('code')->comment('验证码');;
+            $table->string('UserIP')->comment('请求IP');
+            $table->dateTime('endTime')->comment('短信验证码失效时间');
             $table->timestamps();
         });
     }
