@@ -530,4 +530,49 @@ class symbolController extends  Controller
             return response()->json("false");
         }
     }
+
+    //显示小程序音标基础列表
+    public  function  symbolBaseList(){
+        $symbol=Symbol::all();
+        return response()->json($symbol);
+    }
+    //显示音标基本信息
+    public function getSymbolBaseByID($id){
+        $Symbol=Symbol::find($id);
+        return  response()->json($Symbol);
+    }
+    //显示音标基础内容
+    public  function  getSymbolBaseContentByID($refID){
+        $symbolContent=SymbolContent::where("symbol_id",$refID)->first();
+        return response()->json( $symbolContent);
+    }
+    //显示音标字幕组合
+    public  function  getSymbolWordsGroupByID($refID){
+        $symbolWordsgroup=SymbolWordsgroup::where("symbol_id",$refID)->get();
+        return response()->json($symbolWordsgroup);
+    }
+    //显示音标相关单词
+    public  function  getSymbolWordsByID($refID){
+        $symbolWords=SymbolWord::where("symbol_id",$refID)->get();
+        return response()->json($symbolWords);
+    }
+    //显示音标相关短语
+    public  function  getSymbolPhrasesByID($refID){
+        $symbolPhrase=SymbolPhrase::where("symbol_id",$refID)->get();
+        return response()->json($symbolPhrase);
+    }
+    //显示音标相关句子
+    public  function  getSymbolSentenceByID($refID){
+        $symbolSentence=SymbolSentence::where("symbol_id",$refID)->get();
+        return response()->json($symbolSentence);
+    }
+    //显示相关歌曲
+    public  function  getSymbolSongByID($refID){
+        $song=Song::where("ref_id",$refID)->get();
+        return response()->json($song);
+    }
+    public  function  getsongInfoByID($ID){
+        $song=Song::find($ID);
+        return response()->json($song);
+    }
 }

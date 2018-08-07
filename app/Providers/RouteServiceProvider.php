@@ -41,6 +41,8 @@ class RouteServiceProvider extends ServiceProvider
 
         $this->mapWeixinRoutes();
 
+        $this->mapFrontRoutes();
+
         //
     }
 
@@ -63,6 +65,13 @@ class RouteServiceProvider extends ServiceProvider
             ->middleware('api')
             ->namespace($this->namespace)
             ->group(base_path('routes/weixin.php'));
+    }
+
+    protected function mapFrontRoutes(){
+        Route::prefix('front')
+            ->middleware('api')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/front.php'));
     }
 
     /**
