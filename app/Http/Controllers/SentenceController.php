@@ -26,9 +26,12 @@ class SentenceController extends Controller
             $translateServer=new Translate();
             $result=$translateServer->translate($EnWords,'en','zh');
             //生成和成语音文件
-            $speech_APP_ID =config('vcode.baiduSpeech.speech_APP_ID');
-            $speech_API_KEY = config('vcode.baiduSpeech.speech_API_KEY');
-            $speech_SECRET_KEY =config('vcode.baiduSpeech.speech_SECRET_KEY ');
+            //$speech_APP_ID =config('vcode.baiduSpeech.speech_APP_ID');
+            //$speech_API_KEY = config('vcode.baiduSpeech.speech_API_KEY');
+            //$speech_SECRET_KEY =config('vcode.baiduSpeech.speech_SECRET_KEY ');
+            $speech_APP_ID='10727556';
+            $speech_API_KEY='v7oCEgYO4wOQNIi7g1tRp1UC';
+            $speech_SECRET_KEY='oxDcTwrL1MmNGFzVLLtzxViz0Oi8ChUa';
             $client = new AipSpeech($speech_APP_ID, $speech_API_KEY , $speech_SECRET_KEY);
             $results = $client->synthesis($EnWords, 'zh', 1, array(
                 'vol' => 5,

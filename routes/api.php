@@ -116,6 +116,22 @@ Route::prefix('english/symbol')->group(function () {
 
     //添加音标相关歌曲业务逻辑
     Route::post("addSong/{id}","symbolController@addSong");
+
     Route::put("editSong/{id}/PID/{PID}","symbolController@editSong");
     Route::delete("delSong/{id}/PID/{PID}","symbolController@delSong");
 });
+
+//站点新闻
+Route::prefix('english/siteNews')->group(function () {
+    Route::post("addNew","siteNewsController@addNew");
+    Route::delete("delNew/{id}","siteNewsController@delNew");
+    Route::put("editNew/{id}","siteNewsController@editNew");
+});
+
+//首页Banner管理
+Route::prefix('english/homeBanners')->group(function(){
+    Route::post("addBanner","HomeBannerController@addBanner");
+    Route::delete("delBanner/{id}","HomeBannerController@delBanner");
+    Route::put("editBanner/{id}","HomeBannerController@editBanner");
+});
+

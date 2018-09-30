@@ -17,6 +17,8 @@ use App\SymbolWord;
 USE App\symbolPhrase;
 use App\symbolSentence;
 use App\Song;
+use App\siteNews;
+use App\Homebanners;
 
 Route::get('/english/mottoAdd', function () {
     return view('welcome');
@@ -178,6 +180,7 @@ Route::prefix('english/symbol')->group(function () {
         return view("english.songsList",["id"=>$id,"songsList"=>$songsList]);
     });
 
+
     Route::get("addSong/{id}",function ($id){
         return view("english.addSong",["id"=>$id]);
     });
@@ -186,4 +189,48 @@ Route::prefix('english/symbol')->group(function () {
         return view("english.editSong",["id"=>$id,"PID"=>$PID,"song"=>$song]);
     });
 
+});
+
+Route::prefix("song/")->group(function (){
+    Route::get("list",function (){
+        $songsList=Song::where([
+            ["type","=",1]
+        ])->paginate(10);
+        return view("song.list",["songsList"=>$songsList]);
+    });
+    Route::get("addSong",function(){
+        return view("song.addSong");
+    });
+});
+
+//站点新闻管理
+Route::prefix("english/siteNews/")->group(function (){
+   Route::get("list",function (){
+      $newslist=siteNews::where([
+          ["id",">","0"]
+      ])->paginate(10);
+      return view("siteNews.list",["newslist"=>$newslist]);
+   });
+   Route::get("addNew",function (){
+       return view("siteNews.addNew");
+   });
+   Route::get("editNew/{id}",function ($id){
+       $new=siteNews::find($id);
+       return view("siteNews.editNew",["new"=>$new]);
+   });
+});
+
+//站点广告位管理
+Route::prefix("english/homeBanners")->group(function (){
+   Route::get("list",function (){
+       $banners=Homebanners::where("id",">","0")->paginate(10);
+       return view("homeBanners.list",["banners"=> $banners]);
+   });
+   Route::get("addBanner",function (){
+       return view("homeBanners.addBanner");
+   });
+   Route::get("editBanner/{id}",function ($id){
+       $banner=Homebanners::find($id);
+       return view("homeBanners.editBanner",["banner"=>$banner]);
+   });
 });

@@ -31,7 +31,22 @@ Route::prefix('symbol')->group(function () {
     Route::get('symbolSentence/{refID}','symbolController@getSymbolSentenceByID');
     //显示相关歌曲
     Route::get("symbolSong/{refID}",'symbolController@getSymbolSongByID');
-    //显示歌曲相关信息
+    //显示歌曲相关详细信息
     Route::get("songInfo/{ID}",'symbolController@getsongInfoByID');
+});
 
+Route::prefix('song')->group(function(){
+   Route::get("list",'SongController@allSong') ;
+});
+
+//首页展示相关业务逻辑
+Route::prefix('home')->group(function (){
+    Route::get("infos",'HomeController@allinfo');
+    Route::get("banners",'HomeController@banners');
+});
+
+//站点新闻相关业务逻辑
+Route::prefix("siteNews")->group(function(){
+   Route::get("showNews/{id}","siteNewsController@showNews");
+   Route::get("newsList","siteNewsController@newsList");
 });

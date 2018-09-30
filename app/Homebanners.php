@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Videos extends Model
+class Homebanners extends Model
 {
-
+    //
 }
