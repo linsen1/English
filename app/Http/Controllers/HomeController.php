@@ -30,6 +30,8 @@ class HomeController extends  Controller
         $infos['Articles']=Article::where([
             ['id','>',0]
         ])->orderBy('id', 'desc')->take(3)->get();
+        //true隐藏 空显示
+        $infos['showFilm']="";
         return response()->json($infos);
     }
 

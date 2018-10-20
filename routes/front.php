@@ -50,3 +50,9 @@ Route::prefix("siteNews")->group(function(){
    Route::get("showNews/{id}","siteNewsController@showNews");
    Route::get("newsList","siteNewsController@newsList");
 });
+
+Route::prefix("story")->group(function(){
+   Route::get("storyList","StoryController@storyList");
+   Route::get("showStory/{id}","StoryController@showStory");
+   Route::get("showStoryClass/{id}","StoryController@showStoryClass");
+});

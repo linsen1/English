@@ -135,3 +135,8 @@ Route::prefix('english/homeBanners')->group(function(){
     Route::put("editBanner/{id}","HomeBannerController@editBanner");
 });
 
+Route::prefix("english/story")->group(function(){
+    Route::post("addStory","StoryController@addStory");
+    Route::put("editStory/{id}","StoryController@editStory");
+    Route::delete("delStory/{id}","StoryController@delStory");
+});

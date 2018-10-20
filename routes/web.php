@@ -19,6 +19,8 @@ use App\symbolSentence;
 use App\Song;
 use App\siteNews;
 use App\Homebanners;
+use App\story;
+use App\storyClass;
 
 Route::get('/english/mottoAdd', function () {
     return view('welcome');
@@ -233,4 +235,21 @@ Route::prefix("english/homeBanners")->group(function (){
        $banner=Homebanners::find($id);
        return view("homeBanners.editBanner",["banner"=>$banner]);
    });
+});
+
+Route::prefix("english/story")->group(function(){
+    Route::get("list",function(){
+       $stories=story::where("id",">","0")->paginate(10);
+
+       return view("story.list",["stories"=>$stories]);
+    });
+    Route::get("addStory",function(){
+        $storyClass=storyClass::all();
+       return view("story.addStory",["storyClass"=>$storyClass]);
+    });
+    Route::get("editStory/{id}",function ($id){
+        $story=story::find($id);
+        $storyClass=storyClass::all();
+        return view("story.editStory",["story"=>$story,"storyClass"=>$storyClass]);
+    });
 });
